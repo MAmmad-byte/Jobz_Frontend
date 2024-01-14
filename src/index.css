@@ -1,0 +1,9 @@
+.nav-list{
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+}
+.nav-list li{
+    margin: 0 20px;
+    list-style: none;
+}
