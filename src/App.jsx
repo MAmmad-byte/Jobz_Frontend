@@ -6,7 +6,7 @@ import Login from './pages/Login'
 import Home from './pages/Home'
 import Register from './pages/Register'
 import UserDashboard from './pages/UserDashboard'
-import Logout from './components/logout'
+// import Logout from './components/logout'
 import Jobs from './pages/Jobs'
 import Footer from './components/Footer'
 import JobPreview from './pages/JobPreview'
@@ -30,7 +30,7 @@ function App() {
         <Route element={<Login />} path='/login' />
         <Route element={<Register />} path='/register' />
         <Route element={<UserDashboard />} path='/dashboard' />
-        <Route element={<Logout/>} path='/logout' />
+        {/* <Route element={<Logout/>} path='/logout' /> */}
         <Route element={<JobPreview/>} path='/job/:id' />
         <Route element={<JobForm/>} path='/job/:id/apply' />
         <Route element={<CreateJob/>} path='/admin/job/new' />
