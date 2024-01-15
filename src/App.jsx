@@ -14,7 +14,6 @@ import JobForm from './pages/JobForm'
 import CreateJob from './pages/CreateJob'
 import Success from './pages/Success'
 import Users from './pages/Users'
-import AdminUserJobCard from './components/AdminUserJobCard'
 import UserAppliedJobs from './pages/UsersAppliedJobs'
 
 function App() {
