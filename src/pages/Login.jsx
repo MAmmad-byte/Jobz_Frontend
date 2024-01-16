@@ -30,7 +30,7 @@ export default function Login() {
       const  {request} = userServices.UserLogin(data)
       request.then((r)=>{
         localStorage.setItem("auth", r.data)
-        window.location = 'https://jobz-steel.vercel.app/dashboard'
+        window.location = '/dashboard'
       }).catch((e)=>setResError(e.response.data))
      
     }
