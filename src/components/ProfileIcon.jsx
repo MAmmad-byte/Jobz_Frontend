@@ -8,6 +8,7 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { checkIsEmployee } from "../services/authServices";
 
 export default function ProfileIcon({ name }) {
   return (
@@ -25,18 +26,21 @@ export default function ProfileIcon({ name }) {
           <MenuItem>
             <Link to={"/dashboard"}>Dashboard</Link>
           </MenuItem>
+          {
+            (checkIsEmployee()) &&
           <Link to="/admin/allUsers">
             <MenuItem>All Users</MenuItem>
           </Link>
-          <MenuItem>Payments </MenuItem>
+          }
+          {/* <MenuItem>Payments </MenuItem> */}
         </MenuGroup>
         <MenuDivider />
-        <MenuGroup title="Help">
-          <MenuItem>Docs</MenuItem>
+        {/* <MenuGroup title="Services"> */}
+          {/* <MenuItem>Docs</MenuItem> */}
           <MenuItem>
             <Link to="/logout">Logout</Link>
           </MenuItem>
-        </MenuGroup>
+        {/* </MenuGroup> */}
       </MenuList>
     </Menu>
   );
