@@ -20,6 +20,7 @@ import job from "../services/job";
 import { Navigate, redirect, useNavigate } from "react-router-dom";
 import { checkIsEmployee } from "../services/authServices";
 import { useEffect } from "react";
+import TextEditor from "../components/TextEditor";
 
 const jopTypeOptions = [
   { value: "part-Time", label: "Part Time" },
@@ -31,18 +32,26 @@ const jopLocation = [
 ];
 
 const schema = z.object({
-  title: z.string().min(5, {message:"Title must be atleast 5 charactes."}).max(55),
-  jobType: z.string().min(5, {message:"Job-Type must be selected"}).max(55),
-  location: z.string().min(5, {message:"Location must be selected"}).max(55),
-  city: z.string().min(5, {message:"City is required."}).max(55),
-  country: z.string().min(5, {message:"Country is required."}).max(55),
+  title: z
+    .string()
+    .min(5, { message: "Title must be atleast 5 charactes." })
+    .max(55),
+  jobType: z.string().min(5, { message: "Job-Type must be selected" }).max(55),
+  location: z.string().min(5, { message: "Location must be selected" }).max(55),
+  city: z.string().min(5, { message: "City is required." }).max(55),
+  country: z.string().min(5, { message: "Country is required." }).max(55),
   noOfPositions: z
     .number({ invalid_type_error: "Atleast 1 position is required." })
-    .min(1, {message: "Atleast 1 position is required."})
+    .min(1, { message: "Atleast 1 position is required." })
     .max(5000),
-  address: z.string().min(5, {message:"Address is required."}).max(255),
-  salary: z.string().min(1, {message:"Salary is required."}).max(55),
-  description: z.string().min(50, {message:"Description is required or must be atleast 50 characters."}).max(800),
+  address: z.string().min(5, { message: "Address is required." }).max(255),
+  salary: z.string().min(1, { message: "Salary is required." }).max(55),
+  description: z
+    .string()
+    .min(50, {
+      message: "Description is required or must be atleast 50 characters.",
+    })
+    .max(1000),
   featured: z.boolean().optional(),
   deadline: z
     .string()
@@ -53,33 +62,35 @@ const schema = z.object({
 });
 
 export default function CreateJob() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {
-    if(!checkIsEmployee())
-      return navigate("/")
-  }, [])
-  
+    if (!checkIsEmployee()) return navigate("/");
+  }, []);
+
   const {
+    setValue,
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: zodResolver(schema), defaultValues:{
-    title: "",
-    jobType: "",
-    location: "",
-    city: "",
-    country: "",
-    noOfPositions: 0,
-    address: "",
-    salary: "",
-    description: "",
-    featured: false,
-    deadline: ""
-  } });
+  } = useForm({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      title: "",
+      jobType: "",
+      location: "",
+      city: "",
+      country: "",
+      noOfPositions: 0,
+      address: "",
+      salary: "",
+      description: "",
+      featured: false,
+      deadline: "",
+    },
+  });
   const onJobSubmit = async (value) => {
-    const response = await job.jobPost(value)
-    if(response.status == 200)
-      return navigate(`/job/${response.data._id}`)
+    const response = await job.jobPost(value);
+    if (response.status == 200) return navigate(`/job/${response.data._id}`);
   };
   return (
     <PageLayout styles={{ padding: "20px 0", width: "100%" }}>
@@ -174,14 +185,23 @@ export default function CreateJob() {
               errors={errors}
               label="Title"
             />
-            <FormInput
+            {/* <FormInput
               name="description"
               type="text"
               register={register}
               placeholder="Enter Job Description"
               errors={errors}
               label="Description"
-            />
+            /> */}
+            <FormControl mt={5} color={"#000"}>
+              <FormLabel>Description</FormLabel>
+              <TextEditor onChange={(e)=> setValue("description", e)} placeholder={"Enter Job Description"} />
+              {errors["description"] && (
+                <FormHelperText color={"red"}>
+                  {errors["description"]?.message}
+                </FormHelperText>
+              )}
+            </FormControl>
             <FormControl
               p={5}
               display="flex"

@@ -5,7 +5,7 @@ import ShadowBox from "../components/ShadowBox";
 import JobCard from "../components/JobCard";
 import { useNavigate, useParams } from "react-router-dom";
 import job from "../services/job";
-
+import parse from "html-react-parser"
 export default function JobPreview() {
   const { id } = useParams();
   const [showJob, setShowJob] = useState({});
@@ -36,7 +36,7 @@ export default function JobPreview() {
         gap={4}
       >
         <GridItem color={"#000"} colSpan={4} pt={10} pb={10}>
-          <ShadowBox>
+          <ShadowBox >
             <JobCard
               title={showJob.title}
               city={showJob.city}
@@ -46,49 +46,15 @@ export default function JobPreview() {
               styles={{ color: "#000", padding: "20px 0 40px 0" }}
               onClick={handleClick}
             />
-            <Heading color="#000" mt={5} fontSize={17}>
+            <Heading color="#000" mt={5} fontSize={25}>
               {" "}
               Job description{" "}
             </Heading>
-            <Text fontSize={14} color="#000" mt={1} lineHeight={5}>
-              There are many variations of passages of Lorem Ipsum available,
-              but the majority have suffered alteration in some form, by
-              injected humour, or randomised words which don't look even
-              slightly believable. If you are going to use a passage of Lorem
-              Ipsum, you need to be sure there isn't anything embarrassing.
-              Variations of passages of lorem Ipsum available, but the majority
-              have suffered alteration in some form, by injected humour, or
-              randomised words which don't look even slightly believable. If you
-              are going to use a passage of Lorem Ipsum, you need to be sure
-              there isn't anything embarrassing.
-            </Text>
-            <Heading color="#000" mt={5} fontSize={17}>
-              Responsibility
-            </Heading>
-            <Text fontSize={14} color="#000" mt={1} lineHeight={5}>
-              The applicants should have experience in the following areas. Have
-              sound knowledge of commercial activities. Leadership, analytical,
-              and problem-solving abilities. Should have vast knowledge in IAS/
-              IFRS, Company Act, Income Tax, VAT.
-            </Text>
-            <Heading color="#000" mt={5} fontSize={17}>
-              Qualifications
-            </Heading>
-            <Text fontSize={14} color="#000" mt={1} lineHeight={5}>
-              The applicants should have experience in the following areas. Have
-              sound knowledge of commercial activities. Leadership, analytical,
-              and problem-solving abilities. Should have vast knowledge in IAS/
-              IFRS, Company Act, Income Tax, VAT.
-            </Text>
-            <Heading color="#000" mt={5} fontSize={17}>
-              Benefits
-            </Heading>
-            <Text fontSize={14} color="#000" mt={1} lineHeight={5}>
-              There are many variations of passages of Lorem Ipsum available,
-              but the majority have suffered alteration in some form, by
-              injected humour, or randomised words which don't look even
-              slightly believable. If you are going to use a passage of Lorem
-              Ipsum, you need to be sure there isn't anything embarrassing.
+            <Text as={"p"} fontSize={14} color="#000" mt={10} lineHeight={5}>
+              <>
+              {parse(`${showJob.description}`)}
+              </>
+              {/* {showJob.description} */}
             </Text>
           </ShadowBox>
         </GridItem>
