@@ -47,7 +47,7 @@ export default function Register() {
       request.then((r)=>{
         localStorage.setItem("auth", r.data)
         console.log(r.data)
-        window.location = 'https://jobz-steel.vercel.app/dashboard'
+        window.location = 'dashboard'
       }).catch((e)=>setResError(e.response.data))
     }
     const [resError, setResError] =useState("")
