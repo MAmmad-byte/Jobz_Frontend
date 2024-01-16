@@ -14,7 +14,6 @@ import { z } from "zod"
 import FormInput from "../components/forms/FormInput";
 import { useState } from "react";
 import userServices from "../services/userServices";
-import { loginWithJwt } from "../services/authServices";
 
 
 
@@ -41,6 +40,16 @@ export default function Register() {
   
     const { register, handleSubmit , formState: { errors }} = useForm({
       resolver: zodResolver(userSchema),
+      defaultValues:{
+        firstName: "",
+        lastName: "",
+        email:"",
+        password:"",
+        confirmPassword: "",
+        address: "",
+        phone: "",
+        dob: "",
+      }
     })
     const onSubmit = async(data) => {
       const  {request} = userServices.createUser(data)

@@ -28,7 +28,7 @@ class Job{
             city:data.city,
             country:data.country,
             location:data.location,
-            // featured:data.featured,
+            featured:data.featured,
             jobType:data.jobType,
             salary:data.salary,
             address:data.address,
