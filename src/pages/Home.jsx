@@ -69,11 +69,7 @@ export default function Home() {
           </Box>
         </PageLayout>
       </Box>
-      <PageLayout>
-        <Box mt={20}>
-          <JobSearchInput />
-        </Box>
-      </PageLayout>
+      
       <Box background="#EBF8FF">
         <PageLayout>
           <Box mt={140} pt={20} pb={20}>
